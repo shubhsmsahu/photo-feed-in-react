@@ -6,8 +6,10 @@ import ImageScroll from "./component/ImageScroll";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import InfiniteScroll from "react-infinite-scroll-component";
-import ImageModel from "./component/ImageModel";
+import ImageModal from "./component/ImageModel";
+import Modal from "react-modal";
 
+Modal.setAppElement("#root");
 const GlobalStyle = createGlobalStyle`
   *{
     margin:0;
@@ -33,6 +35,11 @@ function App() {
   const [toggle, setToggle] = useState(false);
   const [imageVal, setImageVal] = useState("");
 
+  useEffect(() => {
+    fetchImages();
+    // eslint-disable-next-line
+  }, []);
+
   const fetchImages = () => {
     const accessKey = "UB-rrk_lPANUsuFBf7eb1U5BC-V9vpiz_YwjWEOieiw";
     fetch(
@@ -44,10 +51,6 @@ function App() {
       .then((res) => res.json())
       .then((data) => setImages([...images, ...data]));
   };
-
-  useEffect(() => {
-    fetchImages();
-  }, []);
 
   const handleModel = (event) => {
     setImageVal(event.target.src);
@@ -76,7 +79,7 @@ function App() {
             );
           })}
         </WrapperImage>
-        <ImageModel
+        <ImageModal
           toggle={toggle}
           setToggle={setToggle}
           images={images}

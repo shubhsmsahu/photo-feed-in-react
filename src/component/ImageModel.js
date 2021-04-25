@@ -1,14 +1,14 @@
 import React from "react";
-import Model from "react-modal";
+import Modal from "react-modal";
 import styled from "styled-components";
 
-const ModelStyled = styled.div`
+const ModalStyled = styled.div`
   align-content: center;
   align-items: center;
   text-align: center;
 `;
 
-const ImageModel = ({ toggle, setToggle, images, setImageVal, imageVal }) => {
+const ImageModal = ({ toggle, setToggle, images, setImageVal, imageVal }) => {
   const ImageSelecter = (val) => {
     images.map((image, index) => {
       if (image.urls.thumb === imageVal) {
@@ -20,12 +20,12 @@ const ImageModel = ({ toggle, setToggle, images, setImageVal, imageVal }) => {
           setImageVal(images[i].urls.thumb);
         }
       }
-      return;
+      return 0;
     });
   };
   return (
-    <ModelStyled>
-      <Model
+    <ModalStyled>
+      <Modal
         isOpen={toggle}
         onRequestClose={() => setToggle(false)}
         style={{
@@ -51,9 +51,9 @@ const ImageModel = ({ toggle, setToggle, images, setImageVal, imageVal }) => {
             Next
           </button>
         </div>
-      </Model>
-    </ModelStyled>
+      </Modal>
+    </ModalStyled>
   );
 };
 
-export default ImageModel;
+export default ImageModal;

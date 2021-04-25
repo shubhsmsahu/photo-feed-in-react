@@ -6,6 +6,7 @@ import ImageScroll from "./component/ImageScroll";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import InfiniteScroll from "react-infinite-scroll-component";
+import ImageModel from "./component/ImageModel";
 
 const GlobalStyle = createGlobalStyle`
   *{
@@ -29,6 +30,8 @@ const WrapperImage = styled.section`
 `;
 function App() {
   const [images, setImages] = useState([]);
+  const [toggle, setToggle] = useState(false);
+  const [imageVal, setImageVal] = useState("");
 
   const fetchImages = () => {
     const accessKey = "UB-rrk_lPANUsuFBf7eb1U5BC-V9vpiz_YwjWEOieiw";
@@ -46,6 +49,12 @@ function App() {
     fetchImages();
   }, []);
 
+  const handleModel = (event) => {
+    setImageVal(event.target.src);
+    console.log(event.target.src);
+    setToggle(true);
+  };
+
   return (
     <div className="App">
       <Heading />
@@ -58,9 +67,22 @@ function App() {
       >
         <WrapperImage>
           {images.map((image) => {
-            return <ImageScroll url={image.urls.thumb} key={image.id} />;
+            return (
+              <ImageScroll
+                url={image.urls.thumb}
+                key={image.id}
+                handleModel={handleModel}
+              />
+            );
           })}
         </WrapperImage>
+        <ImageModel
+          toggle={toggle}
+          setToggle={setToggle}
+          images={images}
+          imageVal={imageVal}
+          setImageVal={setImageVal}
+        />
       </InfiniteScroll>
     </div>
   );

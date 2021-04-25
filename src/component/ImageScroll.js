@@ -7,8 +7,8 @@ const Img = styled.img`
   object-fit: cover;
 `;
 
-const ImageScroll = ({ url, key }) => {
-  return <Img src={url} key={key} alt="" />;
+const ImageScroll = ({ url, key, handleModel }) => {
+  return <Img src={url} key={key} alt="" onClick={handleModel} />;
 };
 
 export default ImageScroll;
